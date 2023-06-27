@@ -173,6 +173,7 @@ export class ProgramComponent implements OnInit {
 
     //Setting up the user and team id in session storage
     this.SS_UserId = sessionStorage.getItem("userId");
+    console.log(this.SS_UserId)
     this.SS_TeamId = sessionStorage.getItem("teamId");
 
     if (this.SS_UserId == null || this.SS_TeamId == null) {
@@ -196,7 +197,7 @@ export class ProgramComponent implements OnInit {
       }
 
       //assigning questions
-      this.getprogramQns(this.SS_UserId, this.SS_TeamId);
+      this.getprogramQns( this.SS_TeamId,this.SS_UserId);
 
       //Click fullscreen button through native element
       let el: HTMLElement = this.fullScreenBtn.nativeElement;
@@ -235,8 +236,10 @@ export class ProgramComponent implements OnInit {
     this.progService.getProgramQns(teamId, userId).subscribe((data) => {
       console.log(data);
       this.programQnList = data
-      sessionStorage.setItem("empCode", this.programQnList[0].empCode);
-      sessionStorage.setItem("manager", this.programQnList[0].manager);
+      sessionStorage.setItem(
+        "fullName",
+        this.programQnList[0].firstName + " " + this.programQnList[0].lastName
+      );
       sessionStorage.setItem("team", this.programQnList[0].team);
       sessionStorage.setItem("email", this.programQnList[0].email);
       sessionStorage.setItem("manager", this.programQnList[0].manager);
