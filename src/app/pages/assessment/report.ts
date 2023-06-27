@@ -11,4 +11,11 @@ export class report {
   "totalNoOfQuestions": string;
   "updatedOn": string;
   "userId": string;
+
+  "question": string
+  "answer": string
+  "level": string
+  "remarks": string
+  "totalmark": string
+  "scoredMark": string
 }

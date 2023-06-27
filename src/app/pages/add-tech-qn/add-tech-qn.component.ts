@@ -20,7 +20,7 @@ export class AddTechQnComponent implements OnInit {
     private techService: TechService,
     private alert: AlertifyService,
     private router: Router
-  ) {}
+  ) { }
   teamList: any;
   teamId: any;
   role: any;

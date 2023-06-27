@@ -32,12 +32,12 @@ export class ReportComponent implements OnInit {
 
   teamList: any;
   getAllTeams() {
-    this.alert.showLoading();
+    // this.alert.showLoading();
     this.homeService.getAllTeams().subscribe(
       (data) => {
         console.log(data);
         this.teamList = data;
-        this.alert.hideLoading()
+        // this.alert.hideLoading()
       },
       (err) => {
         console.log("Error :");
@@ -232,6 +232,10 @@ export class ReportComponent implements OnInit {
     }
     if (this.searchKey == "" && this.searchType == "percentage") {
       this.alert.customErrMsgWithoutBtn("Select percentage range");
+      return;
+    }
+    if (this.searchKey == "" && this.searchType == "team") {
+      this.alert.customErrMsgWithoutBtn("team is Required");
       return;
     }
     if (this.searchKey == "" && this.searchType == "date") {

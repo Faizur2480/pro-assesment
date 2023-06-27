@@ -40,7 +40,7 @@ export class AssessmentComponent implements OnInit {
     private eleRef: ElementRef,
     private formBuilder: FormBuilder,
     @Inject(DOCUMENT) private document: any
-  ) {}
+  ) { }
 
   @ViewChild("completeBtn")
   completeBtn!: ElementRef;
@@ -87,7 +87,7 @@ export class AssessmentComponent implements OnInit {
     if (sessionStorage.getItem("userId") == "null") {
       this.router.navigateByUrl("/");
     }
-
+    sessionStorage.setItem("level", "L1");
     sessionStorage.setItem("isReportSaved", "false");
     let visiblitiyHiddenCount = 0;
     //Visiblity change - switching other tabs
@@ -109,8 +109,8 @@ export class AssessmentComponent implements OnInit {
           //Click fullscreen button through native element
           alert(
             "WARNING: " +
-              visiblitiyHiddenCount +
-              " You are not suppose to switch / Move from current tab\nAssessment will end after 3 warnings automatically"
+            visiblitiyHiddenCount +
+            " You are not suppose to switch / Move from current tab\nAssessment will end after 3 warnings automatically"
           );
 
           if (visiblitiyHiddenCount > 3) {
@@ -218,8 +218,8 @@ export class AssessmentComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  totalQuestionsCount = 0 
-  totalQnsList:any[] = []
+  totalQuestionsCount = 0
+  totalQnsList: any[] = []
   getAllAssessmentQns(userId: string, teamId: string) {
     this.assessmentService.getExamQns(userId, teamId).subscribe((data) => {
       console.log(data);
@@ -237,7 +237,7 @@ export class AssessmentComponent implements OnInit {
       sessionStorage.setItem("teamId", this.questionList[0].teamId);
       sessionStorage.setItem("team", this.questionList[0].team);
       sessionStorage.setItem("empCode", this.questionList[0].empCode);
-      sessionStorage.setItem("level","L1");
+      sessionStorage.setItem("level", "L1");
 
 
       //Calculating time based on questions
@@ -251,7 +251,7 @@ export class AssessmentComponent implements OnInit {
       });
 
       let techQnlist = this.questionList
-      this.technicalQnList = techQnlist.splice(this.genQnsCountFromBK,this.techQnsCountFromBK)
+      this.technicalQnList = techQnlist.splice(this.genQnsCountFromBK, this.techQnsCountFromBK)
 
       //Load technicalQnList
       // techQnlist.forEach((element: any, index: any) => {
@@ -415,7 +415,7 @@ export class AssessmentComponent implements OnInit {
     // this.answeredQn[3] = answerValue.qn3;
     // this.answeredQn[4] = answerValue.qn4;
     // this.answeredQn[5] = answerValue.qn5;
-    // this.answeredQn[6] = answerValue.qn6;
+    // this.answeredQn[6] = answerValue.qn6;       
     // this.answeredQn[7] = answerValue.qn7;
     // this.answeredQn[8] = answerValue.qn8;
     // this.answeredQn[9] = answerValue.qn9;

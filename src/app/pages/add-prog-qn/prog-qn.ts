@@ -6,4 +6,6 @@ export class ProgramQn {
   "questionLevel": string;
   "status": string;
   "teamId": string;
+  "programLevel":string
+  "program":string
 }

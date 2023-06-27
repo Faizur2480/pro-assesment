@@ -10,11 +10,12 @@ import { HomeService } from "../home/home.service";
 
 
 @Component({
-  selector: 'app-update-prog-qn',
-  templateUrl: './update-prog-qn.component.html',
-  styleUrls: ['./update-prog-qn.component.css']
+  selector: "app-update-prog-qn",
+  templateUrl: "./update-prog-qn.component.html",
+  styleUrls: ["./update-prog-qn.component.css"],
 })
 export class UpdateProgQnComponent implements OnInit {
+
 
   constructor(
     private aroute: ActivatedRoute,
@@ -44,13 +45,9 @@ export class UpdateProgQnComponent implements OnInit {
           question: new FormControl(this.progQn.question, [
             Validators.required,
           ]),
-          option1: new FormControl(this.progQn.option1, [Validators.required]),
-          option2: new FormControl(this.progQn.option2, [Validators.required]),
-          option3: new FormControl(this.progQn.option3, [Validators.required]),
-          option4: new FormControl(this.progQn.option4, [Validators.required]),
-          answer: new FormControl(this.progQn.answer, [Validators.required]),
+          programLevel: new FormControl(this.progQn.programLevel, [Validators.required]),
           teamId: new FormControl(this.progQn.teamId, [Validators.required]),
-          mulQn: new FormControl(false, [Validators.required]),
+          program: new FormControl(this.progQn.program, [Validators.required]),
         });
         //Swal.close();
       },
@@ -92,28 +89,32 @@ export class UpdateProgQnComponent implements OnInit {
     history.back();
   }
 
+  checkDuplicateOptions(progQnValue: ProgramQn): boolean {
+    return true;
+  }
+
   onSubmit() {
     this.progQnValue = this.progQnForm.value;
-
-    this.progQnValue.question = this.progQnValue.question.trim()
-
-    if (this.progQnValue.question == "") {
-      this.alert.customWarningMsgWithoutBtn("Question is required!");
+    
+    this.progQnValue.program = this.progQnValue.program.trim();
+    this.progQnValue.programLevel = this.progQnValue.programLevel.trim();
+    console.log(this.progQnValue)
+    if (this.progQnValue.program == "") {
+      this.alert.customWarningMsgWithoutBtn("Program is required!");
       return;
     }
-
-     if (this.progQnValue.questionLevel == "") {
-      this.alert.customWarningMsgWithoutBtn("Question Level is required!");
-      return;
+    if (this.progQnValue.programLevel == "" || this.progQnValue.programLevel == "Select Level"  ) {
+      this.alert.customWarningMsgWithoutBtn("Program Level is required!");
     }
+ 
     if (this.progQnValue.teamId == "") {
       this.alert.customWarningMsgWithoutBtn("Team is required!");
       return;
     }
     console.log(this.progQnValue);
-    console.log(this.progQnValue);
+    this.progQnValue.id = this.progQnId 
     this.alert.showLoading();
-    this.progService.addProgramQuestion(this.progQnValue).subscribe(
+    this.progService.updateProgramQuestion(this.progQnValue).subscribe(
       (data: any) => {
         Swal.close();
         console.log(data);
@@ -158,7 +159,4 @@ export class UpdateProgQnComponent implements OnInit {
       }
     );
   }
-
 }
-
-

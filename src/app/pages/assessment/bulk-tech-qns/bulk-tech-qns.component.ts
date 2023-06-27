@@ -121,7 +121,7 @@ export class BulkTechQnsComponent implements OnInit {
           });
         }
       },
-      (err) => {
+      (err:any) => {
         console.log("Error :");
         console.log(err);
         Swal.fire({

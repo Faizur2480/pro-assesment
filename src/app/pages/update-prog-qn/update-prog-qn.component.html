@@ -9,16 +9,17 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-12">
-            <label class="form-label">Question</label>
+            <label class="form-label">Program</label>
             <textarea
               rows="2"
               class="form-control form-control-sm"
-              formControlName="question"
+              formControlName="program"
+              name="program"
             ></textarea>
           </div>
           <div class="col-md-6">
             <label class="form-label">Team</label>
-            <select class="form-select form-select-sm" formControlName="teamId">
+            <select class="form-select form-select-sm" formControlName="teamId" name="teamId">
               <option [value]="">Select Team</option>
               <option [value]="item.id" *ngFor="let item of teamList">
                 {{ item.team }}
@@ -27,8 +28,8 @@
           </div>
           <div class="col-md-6">
             <label class="form-label">Program Level</label>
-            <select class="form-select form-select-sm" formControlName="questionLevel">
-              <option [value]="">Select Level</option>
+            <select class="form-select form-select-sm" formControlName="programLevel" name="programLevel">
+              <option value="Select Level">Select Level</option>
               <option value="B">Beginner</option>          
               <option value="I">Intermediate</option>          
               <option value="A">Advanced</option>

@@ -1,82 +1,72 @@
-
-<div class="container">
+<div class="full-screen" ngxFullscreen #fullscreen="ngxFullscreen">
+  <!-- <button (click)="enterFullscreen()" #fullScreenBtn class="d-none">
+    Toggle Fullscreen
+  </button> -->
+  <!-- <div class="container my-3"> -->
+  <!-- <div class="bg-light rounded-3 text-dark   d-md-block " #myAssess>
+    <div class="container container-fluid">
+    <p class="fw-bold">
+      Welcome, {{ programQnList[0].firstName }}
+      {{ programQnList[0].lastName }} !
+    </p>
+    <h3 class="badge bg-danger fs-1 align-items-center text-center">
+      {{ timeLeft | formatTime }}
+    </h3>
+    <div class="progress">
+      <div [attr.class]="progressColor" role="progressbar" [style.width.%]="progressPercentage"></div>
+    </div>
     <app-user-details></app-user-details>
-    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-</div>
+  </div> -->
+  <!-- <hr> -->
+  <!-- <form [formGroup]="programForm"> -->
+  <div class="row my-2">
+    <div class="col-lg-8 fixed-top sticky-div">
+      <form [formGroup]="programForm">
+        <!-- Program Question -->
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-success fw-bold btn-center" readonly>
+            Program Questions
+          </button>
+        </div>
+        <div class="col-12 my-2 bg-dark" [attr.id]="'progquestion' + i"
+          *ngFor="let item of programQnList; let i = index">
+          <p class="fw-bold text-light disable-text-selection">
+            {{ i + 1 }}. {{ item.program }}
+          </p>
+          <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [name]="'qn' + i"
+            [formControlName]="'qn' + i">
+          </angular-editor>
+        </div>
 
-<div class="container my-3">
-    <div class="bg-light rounded-3 text-dark" #myAssess>
-        <!-- <div class="container container-fluid"> -->
+      </form>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3 fixed-top sticky-div d-none d-lg-block">
+      <div class="bg-light rounded-3 text-dark">
+        <div class="container container-fluid">
           <p class="fw-bold">
-            <!-- Welcome, {{ questionList[0].firstName }}
-            {{ questionList[0].lastName }} ! -->
+            Welcome, {{ programQnList[0].firstName }}
+            {{ programQnList[0].lastName }} !
           </p>
           <h3 class="badge bg-danger fs-1 align-items-center text-center">
-            <!-- {{ timeLeft | formatTime }} -->
+            {{ timeLeft | formatTime }}
           </h3>
           <div class="progress">
-            <!-- <div
-              [attr.class]="progressColor"
-              role="progressbar"
-              [style.width.%]="progressPercentage"
-            ></div> -->
+            <div [attr.class]="progressColor" role="progressbar" [style.width.%]="progressPercentage"></div>
           </div>
           <app-user-details></app-user-details>
         </div>
-    <hr>
-    <!-- <div class="program">
-        <div class="card text-warning p-2">
-            <p>
-                Q1. write binomial series in python
-                and provide an output with proper explanation for the numerical series of 1,2,3,4,5,6,7,8,9 and allocate
-                to
-                iyts
-                number series of the value provider
-            </p>
-            <span class="text-end ">
-                <p class="badge badge-rounded badge-primary">Level: Beginner</p>
-            </span>
-        </div>
-        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"
-            [config]="editorConfig"></angular-editor>
-    </div> -->
-    <form [formGroup]="programForm">
-    <div class="row">
-      <div
-        class="col-12 my-2 bg-dark"
-        [attr.id]="'progquestion' + i"
-        *ngFor="let item of programQnList; let i = index"
-      >
-        <p class="fw-bold text-light disable-text-selection">
-          {{ i + 1 }}. {{ item }}
-        </p>
-        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"
-        [config]="editorConfig"
-        [formControlName]="'qn' + i">
-      </angular-editor>
-        
-        <hr class="line" style="height: 8px;" color="gold" >
-
-         <label class="checkborder" *ngFor="let option of item.options">
-
-           <div class="form-check">
-            <input
-              type="radio"
-              class="form-check-input"
-              [value]="option"
-              [formControlName]="'qn' + i"
-              [name]="'qn' + i"
-            /> 
-            <label class="form-check-label m-2 mx-4 text-dark">{{
-              option
-            }}</label>
-          </div>
-        </label> 
-      
       </div>
-    <div class="text-center">
-        <button class="btn btn-sm btn-danger my-2 text-center">End</button>
+      <div class="text-center">
+        <button class="btn btn-sm btn-danger my-2 text-center" type="button" data-bs-toggle="offcanvas" #completeBtn
+          id="completeBtn" data-bs-target="#completeCanvas" aria-controls="completeCanvas" (click)="onSubmit(true)"
+          *ngIf="enableEndBtn">End Test</button>
+      </div>
     </div>
-
-</div>
-</form>
+    <button (click)="stopTimer()" class="d-none" #stopBtn id="stopBtn">
+      Pause
+    </button>
+    <button (click)="startTimer()" class="d-none" #startBtn id="startBtn">
+      Start
+    </button>
+  </div>

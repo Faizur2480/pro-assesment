@@ -10,4 +10,6 @@ export class question {
   "email": string;
   "team": string;
   "teamId": string;
+  "program": string;
+  "programLevel": string
 }

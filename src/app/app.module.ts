@@ -40,6 +40,9 @@ import { AddProgQnComponent } from './pages/add-prog-qn/add-prog-qn.component';
 import { BulkProgQnsComponent } from './pages/bulk-prog-qns/bulk-prog-qns.component';
 import { ProgQnListComponent } from './pages/prog-qn-list/prog-qn-list.component';
 import { UpdateProgQnComponent } from './pages/update-prog-qn/update-prog-qn.component';
+import { ProgramreportComponent } from './pages/programreport/programreport.component';
+import { DatewiseremarkComponent } from './pages/datewiseremark/datewiseremark.component';
+import { ReviewprogramComponent } from './pages/reviewprogram/reviewprogram.component';
 
 
 @NgModule({
@@ -76,6 +79,9 @@ import { UpdateProgQnComponent } from './pages/update-prog-qn/update-prog-qn.com
     BulkProgQnsComponent,
     ProgQnListComponent,
     UpdateProgQnComponent,
+    ProgramreportComponent,
+    DatewiseremarkComponent,
+    ReviewprogramComponent,
   ],
   imports: [
     

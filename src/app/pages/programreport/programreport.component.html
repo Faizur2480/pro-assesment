@@ -1,0 +1,39 @@
+<app-admin-header></app-admin-header>
+<div class="container ">
+  <div class="card">
+    <div class="card-header" style="height: 50px;">
+      <h6 class="text-center text-light">Program Report(s)</h6>
+    </div>
+    <div class="card-body">
+      <div class="d-flex my-2 float-end">
+        <input type="date" class="form-control form-control-sm" [(ngModel)]="todayDate" name="todayDate">
+        <button class="btn btn-sm btn-success mx-2" type="button" (click)="getVal()">Get Report</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr class="texxt-light">
+            <th scope="col">S.No</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Team</th>
+            <th scope="col">Reported On</th>
+            <th scope="col">Action</th>
+            <!-- <th scope="col">Scored Marks</th>
+            <th scope="col">Total Marks</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Status</th> -->
+          </tr>
+        </thead>
+        <tbody class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <tr *ngFor="let item of reportList; let i=index">
+            <td scope="row">{{i+1}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.teamName}}</td>
+            <td class="text"> {{item.reportedOn}}</td>
+            <td class="text primary"><button class="btn btn-info btn-sm rounded-pill"
+                (click)="gotoDatewisereport(item)"> View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

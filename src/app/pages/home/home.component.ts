@@ -18,17 +18,12 @@ import { FormBuilder } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   numericPattern = /^[0-9]*$/;
-  selectedValue: string = "";
   adminRadio: any;
 
   constructor(
     private homeService: HomeService,
     private route: Router,
     private alert: AlertifyService,
-    private settingService: DashboardService,
-    
-    
-  ) {}
     private settingService: DashboardService
   ) { }
 
@@ -60,7 +55,7 @@ export class HomeComponent implements OnInit {
       console.log(data);
       this.settings = data[0];
       this.totalQns = this.settings.genQns + this.settings.techQns;
-      this.totalPrgQns = this.settings.prgQns;
+      this.totalPrgQns = this.settings.beginner + this.settings.intermediate + this.settings.advanced;
     });
   }
 
@@ -88,6 +83,8 @@ export class HomeComponent implements OnInit {
       this.teamList = data;
     });
   }
+
+
 
   resData: any;
   submitBtnValue: string = buttonValue.START_ASSESS;
@@ -117,7 +114,7 @@ export class HomeComponent implements OnInit {
       title: "Read Instruction",
       html: this.registerValue.level == "L1" ? `There are ${this.totalQns} overall questions.
       Each question carries 1 mark.
-      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalPrgQns} overall question(s).`,
+      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalPrgQns} overall question(s). You can end your assesment only after 15 mins`,
       showDenyButton: true,
       confirmButtonText: "Start",
       denyButtonText: `Cancel`,
@@ -221,9 +218,9 @@ export class HomeComponent implements OnInit {
             if (result.isConfirmed) {
               Swal.fire({
                 title: "Read Instruction",
-                html: `There are ${this.totalQns} overall questions.
-            Each question carries 1 mark.
-            Once an assessment has begun, it cannot be stopped`,
+                html: this.registerValue.level == "L1" ? `There are ${this.totalQns} overall questions.
+      Each question carries 1 mark.
+      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalPrgQns} overall question(s). You can end your assesment only after 15 mins`,
                 showDenyButton: true,
                 confirmButtonText: "Start",
                 denyButtonText: `Cancel`,
@@ -373,17 +370,4 @@ export class HomeComponent implements OnInit {
       event.preventDefault();
     }
   }
-
-// Using Level Login
-
-navigateToPage() {
-
-  if (this.selectedValue === 'Level-I') {
-    this.route.navigate(['/assessment']);
-  } else if (this.selectedValue === 'Level-II') {
-    this.route.navigate(['/program']);
-  } 
-
-}
-
 }

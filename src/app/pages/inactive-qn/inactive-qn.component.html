@@ -1,177 +1,447 @@
 <app-admin-header></app-admin-header>
+
 <!-- <div class="container"> -->
-  <div class="card">
-    <div class="card-header">
-      <h6 class="text-center text-light">Inactive Questions List</h6>
-    </div>
 
-    <div class="card-body bg-light">
-      <div class="d-flex flex-wrap flex-row bd-highlight mb-3">
-        <div class="p-2 bd-highlight text-dark">Choose By:</div>
+<div class="card">
 
-        <div class="p-2 bd-highlight text-dark">
-          <select
-            name="searchType"
-            [(ngModel)]="searchType"
-            class="form-select form-select-sm"
-            (ngModelChange)="onChangeStatus($event)"
-          >
-            <option value="">Select</option>
+  <div class="card-header">
 
-            <option value="techQuestions">Technical Questions</option>
+    <h6 class="text-center text-light">Inactive Questions List</h6>
 
-            <option value="genQuestions">General Questions</option>
+  </div>
 
-            <!-- <option value="attempts">Registered On</option> -->
-          </select>
-        </div>
 
-        <div class="p-2 bd-highlight">
-          <select
-            name="searchKey"
-            class="form-select form-select-sm"
-            [(ngModel)]="searchKey"
-            *ngIf="isEnableTeam"
-          >
-            <option value="">Select</option>
 
-            <option *ngFor="let item of teamList" [value]="item.id">
-              {{ item.team }}
-            </option>
-          </select>
-        </div>
 
-        <div class="p-2 bd-highlight">
-          <input
-            type="submit"
-            value="Search"
-            class="btn btn-sm btn-primary"
-            (click)="getInactiveQns()"
-          />
-        </div>
+  <div class="card-body bg-light">
 
-        <div class="p-2 bd-highlight">
-          <input
-            type="button"
-            value="Clear"
-            class="btn btn-sm btn-danger"
-            (click)="clearFields()"
-          />
-        </div>
+    <div class="d-flex flex-wrap flex-row bd-highlight mb-3">
+
+      <div class="p-2 bd-highlight text-dark">Choose By:</div>
+
+
+
+
+      <div class="p-2 bd-highlight text-dark">
+
+        <select name="searchType" [(ngModel)]="searchType" class="form-select form-select-sm"
+          (ngModelChange)="onChangeStatus($event)">
+
+          <option value="">Select</option>
+
+
+
+
+          <option value="genQuestions">General Questions</option>
+
+
+
+
+          <option value="techQuestions">Technical Questions</option>
+
+
+
+
+          <option value="progQuestions">Program Questions</option>
+
+
+
+
+          <!-- <option value="attempts">Registered On</option> -->
+
+        </select>
+
       </div>
 
-      <div class="row my-2">
-        <div
-          class="card-header row bg-dark align-items-center"
-          *ngIf="inactiveList.length > 0"
-        >
-          <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
-            <label> Total Items: {{ inactiveList.length }}</label>
-          </div>
 
-          <div
-            class="col-lg-10 col-sm-12 col-md-4 d-flex justify-content-end align-items-center flex-end"
-          >
-            <pagination-controls
-              [responsive]="true"
-              class="my-1"
-              previousLabel="Prev"
-              nextLabel="Next"
-              (pageChange)="handlePageChange($event)"
-            ></pagination-controls>
-          </div>
+
+
+      <div class="p-2 bd-highlight">
+
+        <select name="searchKey" class="form-select form-select-sm" [(ngModel)]="searchKey" *ngIf="isEnableTeam">
+
+          <option value="">Select</option>
+
+
+
+
+          <option *ngFor="let item of teamList" [value]="item.id">
+
+            {{ item.team }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+
+
+      <div class="p-2 bd-highlight">
+
+        <input type="submit" value="Search" class="btn btn-sm btn-primary" (click)="getInactiveQns()" />
+
+      </div>
+
+
+
+
+      <div class="p-2 bd-highlight">
+
+        <input type="button" value="Clear" class="btn btn-sm btn-danger" (click)="clearFields()" />
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="row my-2">
+
+      <div class="card-header row bg-dark align-items-center" *ngIf="inactiveProgList.length > 0">
+
+        <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
+
+          <label> Total Items: {{ inactiveProgList.length }}</label>
+
         </div>
 
-        <div class="row my-2 table-responsive">
-          <p
-            *ngIf="inactiveList.length == 0"
+
+
+
+        <div class="col-lg-10 col-sm-12 col-md-4 d-flex justify-content-end align-items-center flex-end">
+
+          <pagination-controls [responsive]="true" class="my-1" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+
+        </div>
+
+      </div>
+
+
+
+
+      <div class="row my-2 table-responsive">
+
+        <!-- <p
+
+            *ngIf="inactiveProgList.length == 0"
+
             class="text-center badge bg-warning text-dark"
+
           >
-            Choose General or Technical Questions to retrive in-active record(s)
-          </p>
 
-          <table class="table text-dark" *ngIf="inactiveList.length > 0">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
+            Choose General or Technical or Program Questions to retrive in-active record(s)
 
-                <th scope="col">Question</th>
+          </p> -->
 
-                <th scope="col">Answer</th>
 
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
 
-            <tbody
-              class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
-              *ngFor="
-                let item of inactiveList
+
+        <table class="table text-dark" *ngIf="inactiveProgList.length > 0">
+
+          <thead>
+
+            <tr>
+
+              <th scope="col">#</th>
+
+
+
+
+              <th scope="col">Program</th>
+
+              <th scope="col">Team</th>
+
+              <th scope="col">Program Level</th>
+
+              <th scope="col">Action</th>
+
+            </tr>
+
+          </thead>
+
+
+
+
+          <tbody class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="
+
+                let item of inactiveProgList
+
                   | paginate
+
                     : {
+
                         itemsPerPage: pageSize,
+
+
+
 
                         currentPage: page,
 
+
+
+
                         totalItems: count
+
                       };
+
                 let i = index
-              "
-            >
-              <tr>
-                <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
 
-                <td>{{ item.question }}</td>
+              ">
 
-                <td>{{ item.answer }}</td>
+            <tr>
 
-                <td >
-                  <a
-                  *ngIf="teamId == item.teamId || role == 'SA'"
-                    href="javascript:void(0)"
-                    class="btn btn-outline-dark btn-sm"
-                    (click)="activeQuestionById(item.id)"
-                    >Activate</a
-                  >
-                  <P *ngIf="teamId != item.teamId">No Action</P>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
 
-        <div
-          class="card-header row bg-dark align-items-center"
-          *ngIf="inactiveList.length > 0"
-        >
-          <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
-            <label> Items per Page:</label>
-          </div>
 
-          <div class="col-lg-1 col-sm-12 col-md-4">
-            <select
-              (change)="handlePageSizeChange($event)"
-              class="form-select form-select-sm"
-            >
-              <option *ngFor="let size of pageSizes" [ngValue]="size">
-                {{ size }}
-              </option>
-            </select>
-          </div>
 
-          <div
-            class="col-lg-9 col-sm-12 col-md-4 d-flex justify-content-end align-items-center"
-          >
-            <pagination-controls
-              [responsive]="true"
-              class="my-1"
-              previousLabel="Prev"
-              nextLabel="Next"
-              (pageChange)="handlePageChange($event)"
-            ></pagination-controls>
-          </div>
-        </div>
+
+              <td>{{ item.program }}</td>
+
+              <td>{{ item.team }}</td>
+
+              <td *ngIf="item.programLevel == 'B'">Beginner</td>
+              <td *ngIf="item.programLevel == 'I'">Intermediate</td>
+              <td *ngIf="item.programLevel == 'A'">Advanced</td>
+
+
+
+
+              <td>
+
+                <a *ngIf="teamId == item.teamId || role == 'SA'" href="javascript:void(0)"
+                  class="btn btn-outline-dark btn-sm" (click)="activeQuestionById(item.id)">Activate</a>
+
+                <P *ngIf="teamId != item.teamId">No Action</P>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
       </div>
+
+
+
+
+      <div class="card-header row bg-dark align-items-center" *ngIf="inactiveProgList.length > 0">
+
+        <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
+
+          <label> Items per Page:</label>
+
+        </div>
+
+
+
+
+        <div class="col-lg-1 col-sm-12 col-md-4">
+
+          <select (change)="handlePageSizeChange($event)" class="form-select form-select-sm">
+
+            <option *ngFor="let size of pageSizes" [ngValue]="size">
+
+              {{ size }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+
+        <div class="col-lg-9 col-sm-12 col-md-4 d-flex justify-content-end align-items-center">
+
+          <pagination-controls [responsive]="true" class="my-1" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+
+        </div>
+
+      </div>
+
     </div>
+
+    <div class="row my-2">
+
+      <div class="card-header row bg-dark align-items-center" *ngIf="inactiveGenTechList.length > 0">
+
+        <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
+
+          <label> Total Items: {{ inactiveGenTechList.length }}</label>
+
+        </div>
+
+
+
+
+        <div class="col-lg-10 col-sm-12 col-md-4 d-flex justify-content-end align-items-center flex-end">
+
+          <pagination-controls [responsive]="true" class="my-1" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+
+        </div>
+
+      </div>
+
+
+
+
+      <div class="row my-2 table-responsive">
+
+        <p *ngIf="inactiveGenTechList.length == 0 && inactiveProgList.length == 0"
+          class="text-center badge bg-warning text-dark">
+
+          Choose General or Technical or Program Questions to retrive in-active record(s)
+
+        </p>
+
+
+
+
+        <table class="table text-dark" *ngIf="inactiveGenTechList.length > 0">
+
+          <thead>
+
+            <tr>
+
+              <th scope="col">#</th>
+
+
+
+
+              <th scope="col">Question</th>
+
+
+
+
+              <th scope="col">Answer</th>
+
+
+
+
+              <th scope="col">Action</th>
+
+            </tr>
+
+          </thead>
+
+
+
+
+          <tbody class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="
+
+                let item of inactiveGenTechList
+
+                  | paginate
+
+                    : {
+
+                        itemsPerPage: pageSize,
+
+
+
+
+                        currentPage: page,
+
+
+
+
+                        totalItems: count
+
+                      };
+
+                let i = index
+
+              ">
+
+            <tr>
+
+              <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
+
+
+
+
+              <td>{{ item.question }}</td>
+
+
+
+
+              <td>{{ item.answer }}</td>
+
+
+
+
+              <td>
+
+                <a *ngIf="teamId == item.teamId || role == 'SA'" href="javascript:void(0)"
+                  class="btn btn-outline-dark btn-sm" (click)="activeQuestionById(item.id)">Activate</a>
+
+                <P *ngIf="teamId != item.teamId">No Action</P>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+
+      <div class="card-header row bg-dark align-items-center" *ngIf="inactiveGenTechList.length > 0">
+
+        <div class="col-lg-2 col-sm-12 col-md-4 d-flex align-items-center">
+
+          <label> Items per Page:</label>
+
+        </div>
+
+
+
+
+        <div class="col-lg-1 col-sm-12 col-md-4">
+
+          <select (change)="handlePageSizeChange($event)" class="form-select form-select-sm">
+
+            <option *ngFor="let size of pageSizes" [ngValue]="size">
+
+              {{ size }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+
+        <div class="col-lg-9 col-sm-12 col-md-4 d-flex justify-content-end align-items-center">
+
+          <pagination-controls [responsive]="true" class="my-1" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
+</div>
+
 <!-- </div> -->

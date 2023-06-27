@@ -19,7 +19,7 @@ export class AddProgQnComponent implements OnInit {
     private progService: ProgService,
     private alert: AlertifyService,
     private router: Router
-  ) {}
+  ) { }
   teamList: any;
   teamId: any;
   role: any;
@@ -32,6 +32,8 @@ export class AddProgQnComponent implements OnInit {
     this.role = sessionStorage.getItem("role")?.toString();
 
     this.progQnForm = new FormGroup({
+      program: new FormControl("", [Validators.required]),
+      programLevel: new FormControl("Select Level", [Validators.required]),
       question: new FormControl("", [Validators.required]),
       questionLevel: new FormControl("Select Level", [Validators.required]),
       teamId: new FormControl("Select Team", [Validators.required]),
@@ -72,6 +74,7 @@ export class AddProgQnComponent implements OnInit {
     );
   }
 
+
   goBack() {
     history.back();
   }
@@ -79,66 +82,69 @@ export class AddProgQnComponent implements OnInit {
   onSubmit() {
     this.progQnValue = this.progQnForm.value;
 
-    this.progQnValue.question = this.progQnValue.question.trim();
-    this.progQnValue.questionLevel = this.progQnValue.questionLevel.trim();
+    this.progQnValue.program = this.progQnValue.program.trim();
+    this.progQnValue.programLevel = this.progQnValue.programLevel.trim();
+    console.log(this.progQnValue)
+    if (this.progQnValue.program == "") {
+      this.alert.customWarningMsgWithoutBtn("Program is required!");
+      return;
+    }
+    if (this.progQnValue.programLevel == "" || this.progQnValue.programLevel == "Select Level") {
+      this.alert.customWarningMsgWithoutBtn("Program Level is required!");
+    }
 
-    if (this.progQnValue.question == "") {
-      this.alert.customWarningMsgWithoutBtn("Question is required!");
-      return;
-    }
-    if (this.progQnValue.questionLevel == "") {
-      this.alert.customWarningMsgWithoutBtn("Question Level is required!");
-      return;
-    }
-    if (this.progQnValue.teamId == "") {
-      this.alert.customWarningMsgWithoutBtn("Team is required!");
-      return;
-    }
-    console.log(this.progQnValue);
-    this.alert.showLoading();
-    this.progService.addProgramQuestion(this.progQnValue).subscribe(
-      (data: any) => {
-        Swal.close();
-        console.log(data);
+      this.progQnValue.question = this.progQnValue.question.trim();
+      this.progQnValue.questionLevel = this.progQnValue.questionLevel.trim();
 
-        if (data.status == 0) {
-          //After added
-          Swal.fire({
-            title: data.message,
-            showDenyButton: false,
-            showCancelButton: false,
-            allowOutsideClick: false,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              if (!this.progQnForm.value.mulQn) {
-                this.router.navigateByUrl("/prog-qn-list");
-              } else {
-                this.progQnForm.reset();
+      if (this.progQnValue.teamId == "") {
+        this.alert.customWarningMsgWithoutBtn("Team is required!");
+        return;
+      }
+      console.log(this.progQnValue);
+      this.alert.showLoading();
+      this.progService.addProgramQuestion(this.progQnValue).subscribe(
+        (data: any) => {
+          Swal.close();
+          console.log(data);
+
+          if (data.status == 0) {
+            //After added
+            Swal.fire({
+              title: data.message,
+              showDenyButton: false,
+              showCancelButton: false,
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                if (!this.progQnForm.value.mulQn) {
+                  this.router.navigateByUrl("/prog-qn-list");
+                } else {
+                  this.progQnForm.reset();
+                }
               }
-            }
-          });
-        } else if (data.status == 1) {
+            });
+          } else if (data.status == 1) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              text: data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        },
+        (err) => {
+          console.log("Error :");
+          console.log(err);
           Swal.fire({
             position: "center",
             icon: "error",
-            text: data.message,
+            title: message.SOMETHING_WRONG,
+            text: err,
             showConfirmButton: false,
             timer: 1500,
           });
         }
-      },
-      (err) => {
-        console.log("Error :");
-        console.log(err);
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: message.SOMETHING_WRONG,
-          text: err,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    );
-  }
+      );
+    }
 }

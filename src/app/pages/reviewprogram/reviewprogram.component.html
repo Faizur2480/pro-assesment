@@ -1,0 +1,44 @@
+<app-admin-header></app-admin-header>
+<div class="container ">
+  <div class="card p-3">
+    <div class="card-header">
+      <h6 class="text-center text-light">Program review</h6>
+    </div>
+    <label for="">Question</label>
+    <div disabled rows="6" cols="100" class="container" [innerHTML]="prog.question"></div>
+    <!-- <textarea disabled rows="2" cols="50" class="container">{{prog.question}}</textarea> -->
+    <br>
+    <label for="">Answer</label>
+    <!-- <textarea disabled rows="6" cols="100" class="container" [innerHTML]="prog.answer"></textarea> -->
+    <div disabled rows="6" cols="100" class="container" [innerHTML]="prog.answer"></div>
+    <hr>
+
+    <div class="form">
+      <div class="form-group row">
+        <label for="proglevel" class="col-sm-2 ">Total Mark :</label>
+        <div class="col-sm-2">
+          <input type="text" disabled class="form-control form-control-sm" id="proglevel" value={{prog.totalMark}}>
+        </div>
+        <label for="proglevel" class="col-sm-2 ">Program Level :</label>
+        <div class="col-sm-6">
+          <input type="text" disabled class="form-control form-control-sm" id="proglevel" value={{prog.level}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="proglevel" class="col-sm-2 ">Scored Mark :</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control form-control-sm" id="scoredMark" [(ngModel)]="prog.scoredMark">
+        </div>
+        <label for="proglevel" class="col-sm-2 ">Remarks :</label>
+        <div class="col-sm-6">
+          <textarea class="form-control form-control-sm" id="remarks" [(ngModel)]="prog.remarks"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center ">
+      <button type="button" class="btn btn-sm btn-success" (click)="updateProgReport()">Update
+        Review</button>
+      <button type="button" class="btn btn-sm btn-danger mx-2" (click)="goBack()">Cancel</button>
+    </div>
+  </div>
+</div>

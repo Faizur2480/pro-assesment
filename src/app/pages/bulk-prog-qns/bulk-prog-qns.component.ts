@@ -89,54 +89,54 @@ export class BulkProgQnsComponent implements OnInit {
 
   callingSaveBulkProgQnsService() {
     this.alert.showLoading();
-    this.progService.saveBulkProgramQuestions(this.resultList).subscribe(
-      (data: any) => {
-        Swal.close();
-        console.log(data);
-        const { status, message, duplicateQns } = data;
-        if (status == 0) {
-          //After added
-          Swal.fire({
-            title: message,
-            showDenyButton: false,
-            showCancelButton: false,
-            allowOutsideClick: false,
-          }).then((result:any) => {
-            if (result.isConfirmed) {
-              this.clearInput();
-              this.router.navigateByUrl("/prog-qn-list");
-            }
-          });
-        } else if (status == 1) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            text: message,
-            showConfirmButton: true,
-          });
-        } else if (status == 1 && duplicateQns == "duplicateQns" || duplicateQns != undefined) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: message,
-            text: duplicateQns,
-            showConfirmButton: true,
-          });
-        }
-      },
-      (err:any) => {
-        console.log("Error :");
-        console.log(err);
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: message.SOMETHING_WRONG,
-          text: err,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    );
+    // this.progService.saveBulkProgramQuestions(this.resultList).subscribe(
+    //   (data: any) => {
+    //     Swal.close();
+    //     console.log(data);
+    //     const { status, message, duplicateQns } = data;
+    //     if (status == 0) {
+    //       //After added
+    //       Swal.fire({
+    //         title: message,
+    //         showDenyButton: false,
+    //         showCancelButton: false,
+    //         allowOutsideClick: false,
+    //       }).then((result:any) => {
+    //         if (result.isConfirmed) {
+    //           this.clearInput();
+    //           this.router.navigateByUrl("/prog-qn-list");
+    //         }
+    //       });
+    //     } else if (status == 1) {
+    //       Swal.fire({
+    //         position: "center",
+    //         icon: "error",
+    //         text: message,
+    //         showConfirmButton: true,
+    //       });
+    //     } else if (status == 1 && duplicateQns == "duplicateQns" || duplicateQns != undefined) {
+    //       Swal.fire({
+    //         position: "center",
+    //         icon: "error",
+    //         title: message,
+    //         text: duplicateQns,
+    //         showConfirmButton: true,
+    //       });
+    //     }
+    //   },
+    //   (err:any) => {
+    //     console.log("Error :");
+    //     console.log(err);
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "error",
+    //       title: message.SOMETHING_WRONG,
+    //       text: err,
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     });
+    //   }
+    // );
   }
 
   clearInput() {
