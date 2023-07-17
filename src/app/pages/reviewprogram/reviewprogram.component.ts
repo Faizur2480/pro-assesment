@@ -34,19 +34,42 @@ export class ReviewprogramComponent implements OnInit {
     this.request.remarks = this.prog.remarks
     this.request.userId = this.prog.userId
 
+    if (this.request.scoredMark == '') {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        text: 'Scored Mark is required',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return
+    }
+
     this.reportService.updateProgReports(this.request).subscribe(
       (data: any) => {
         console.log(data);
-        Swal.fire({
-          title: data.message,
-          showDenyButton: false,
-          showCancelButton: false,
-          allowOutsideClick: false,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            history.back()
-          }
-        });
+        if (data.status == "1") {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            text: data.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+        } else {
+          Swal.fire({
+            title: data.message,
+            showDenyButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.back()
+            }
+          });
+        }
+
       }
     )
   }

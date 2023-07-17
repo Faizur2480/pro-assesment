@@ -8,6 +8,7 @@
       <div class="d-flex my-2 float-end">
         <input type="date" class="form-control form-control-sm" [(ngModel)]="todayDate" name="todayDate">
         <button class="btn btn-sm btn-success mx-2" type="button" (click)="getVal()">Get Report</button>
+        <button class="btn btn-sm btn-success mx-2" type="button" (click)="exportToExcel()">Export</button>
       </div>
       <table class="table">
         <thead>
@@ -16,11 +17,10 @@
             <th scope="col">Full Name</th>
             <th scope="col">Team</th>
             <th scope="col">Reported On</th>
-            <th scope="col">Action</th>
-            <!-- <th scope="col">Scored Marks</th>
+            <th scope="col">Scored Marks</th>
             <th scope="col">Total Marks</th>
-            <th scope="col">Remarks</th>
-            <th scope="col">Status</th> -->
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -29,6 +29,11 @@
             <td>{{item.userName}}</td>
             <td>{{item.teamName}}</td>
             <td class="text"> {{item.reportedOn}}</td>
+            <td class="text"> {{item.scoredMark}}</td>
+            <td class="text"> {{item.totalMark}}</td>
+            <td class="text">
+              <span class="badge bg-dark" >{{item.status}}</span>
+            </td>
             <td class="text primary"><button class="btn btn-info btn-sm rounded-pill"
                 (click)="gotoDatewisereport(item)"> View</button></td>
           </tr>

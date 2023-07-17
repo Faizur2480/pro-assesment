@@ -25,10 +25,14 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="proglevel" class="col-sm-2 ">Scored Mark :</label>
-        <div class="col-sm-2">
-          <input type="text" class="form-control form-control-sm" id="scoredMark" [(ngModel)]="prog.scoredMark">
+        <label for="proglevel" class="col-sm-2">Scored Mark :</label>
+        <div class="col-sm-2" >
+          <input tabindex="3" type="text" class="form-control form-control-sm" id="scoredMark" [(ngModel)]="prog.scoredMark" required #scoredMarkInput="ngModel" autofocus>
         </div>
+        <!-- <div *ngIf="scoredMarkInput.invalid && scoredMarkInput.touched" class="text-danger">
+          Scored Mark is required.
+        </div> -->
+        
         <label for="proglevel" class="col-sm-2 ">Remarks :</label>
         <div class="col-sm-6">
           <textarea class="form-control form-control-sm" id="remarks" [(ngModel)]="prog.remarks"></textarea>

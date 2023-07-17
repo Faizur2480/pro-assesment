@@ -122,7 +122,7 @@ export class AdminLoginComponent implements OnInit {
     this.adminService.addAdminRequest(this.adminReq).subscribe((data: any) => {
       console.log(data);
 
-      const { status, message } = data;
+      const { status, message } =  data;
       if (status == 1) {
         Swal.fire({
           position: "center",
@@ -138,7 +138,7 @@ export class AdminLoginComponent implements OnInit {
           allowOutsideClick: false,
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload();
+            window.location.reload(); 
           }
         });
       }

@@ -255,7 +255,7 @@ export class ProgramComponent implements OnInit {
       var timeI = 0
       for (var i = 0; i < data.length; i++) {
         if (data[i].programLevel == "B") {
-          countB = countB + 1;
+           countB = countB + 1;
         } else if (data[i].programLevel == "I") {
           countI = countI + 1;
         } else if (data[i].programLevel == "A") {
@@ -303,7 +303,7 @@ export class ProgramComponent implements OnInit {
   //   }, this.timerSec);
   // }
   minEndTime = 0 // 15mins = 900 sec
-  enableEndBtn: boolean = false
+  enableEndBtn: boolean = true
   startTimer() {
     const targetDuration = 1800; // Target duration in seconds
     const intervalDuration = 2000; // Interval duration in milliseconds
@@ -327,9 +327,9 @@ export class ProgramComponent implements OnInit {
       console.log("timeLeft: " + this.timeLeft);
 
 
-      if (this.timeLeft == this.minEndTime) {
-        this.enableEndBtn = true
-      }
+      // if (this.timeLeft == this.minEndTime) {
+      //   this.enableEndBtn = true
+      // }
       if (this.timeLeft < 1) {
         clearInterval(this.interval);
         this.onSubmit(true)
