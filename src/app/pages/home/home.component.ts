@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   teamList: any;
   settings: any;
   totalQns: number = 0;
-  totalPrgQns: number = 0;
+  totalProgQns: number = 0;
   ngOnInit() {
     sessionStorage.clear();
     this.registerForm = new FormGroup({
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
       console.log(data);
       this.settings = data[0];
       this.totalQns = this.settings.genQns + this.settings.techQns;
-      this.totalPrgQns = this.settings.beginner + this.settings.intermediate + this.settings.advanced;
+      this.totalProgQns = this.settings.beginner + this.settings.intermediate + this.settings.advanced;
     });
   }
 
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
       title: "Read Instruction",
       html: this.registerValue.level == "L1" ? `There are ${this.totalQns} overall questions.
       Each question carries 1 mark.
-      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalPrgQns} overall question(s). You can end your assesment only after 15 mins`,
+      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalProgQns} overall question(s)`,
       showDenyButton: true,
       confirmButtonText: "Start",
       denyButtonText: `Cancel`,
@@ -220,7 +220,7 @@ export class HomeComponent implements OnInit {
                 title: "Read Instruction",
                 html: this.registerValue.level == "L1" ? `There are ${this.totalQns} overall questions.
       Each question carries 1 mark.
-      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalPrgQns} overall question(s). You can end your assesment only after 15 mins`,
+      Once an assessment has begun, it cannot be stopped`: `There are ${this.totalProgQns} overall question(s)`,
                 showDenyButton: true,
                 confirmButtonText: "Start",
                 denyButtonText: `Cancel`,
@@ -263,7 +263,7 @@ export class HomeComponent implements OnInit {
             icon: "error",
             title: "Invalid Phone Number",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 5000,
           });
           this.submitBtnValue = buttonValue.START_ASSESS;
         }
@@ -326,7 +326,7 @@ export class HomeComponent implements OnInit {
             icon: "error",
             title: this.resData.message,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 5000,
           });
           // this.errMsg = this.resData.message;
           this.submitBtnValue = buttonValue.START_ASSESS;

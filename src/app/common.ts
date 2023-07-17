@@ -1,6 +1,6 @@
 export class baseUrl {
-  // public static BASE_URL: string = "http://localhost:8080/api/v1/";
-  public static BASE_URL: string = "http://52.91.195.253:8080/assessment/api/v1/";
+  public static BASE_URL: string = "http://localhost:8080/api/v1/";
+  // public static BASE_URL: string = "http://52.91.195.253:8080/assessment/api/v1/";
   // http://52.91.195.253:8080/assessment/
   // http://210.18.155.153:8080/api/v1/
 }

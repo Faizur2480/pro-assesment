@@ -13,6 +13,7 @@ export class DashboardService {
   private widgetDataUrl = baseUrl.BASE_URL + "widgetData";
   private questionsActiveInactiveUrl = baseUrl.BASE_URL + "questionsActiveInactive";
   private userAttemptsChartUrl = baseUrl.BASE_URL + "userAttemptsChart";
+  private userProgAttemptsChartUrl = baseUrl.BASE_URL + "userProgAttemptsChart";
   private datewisePassFailUrl = baseUrl.BASE_URL + "datewisePassFail";
   private teamExamReadinessUrl = baseUrl.BASE_URL + "teamExamReadiness";
 
@@ -34,6 +35,11 @@ export class DashboardService {
   userAttemptsChart() {
     return this.httpClient.get<any>(this.userAttemptsChartUrl);
   }
+
+  userProgAttemptsChart() {
+    return this.httpClient.get<any>(this.userProgAttemptsChartUrl);
+  }
+  
   teamExamReadiness() {
     return this.httpClient.get<any>(this.teamExamReadinessUrl);
   }

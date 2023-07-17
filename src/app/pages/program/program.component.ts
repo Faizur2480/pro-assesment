@@ -344,29 +344,41 @@ export class ProgramComponent implements OnInit {
 
   onSubmit(value: boolean) {
     //alert("inside on submit method");
-    this.answerValue = this.programForm.value;
-    console.log(this.answerValue);
-
-    let index = 0;
-    for (let key in this.answerValue) {
-      var progReport = { question: "", answer: "", level: "", userId: 0, teamId: 0 };
-      if (this.answerValue.hasOwnProperty(key)) {
-        const value = this.answerValue[key];
-
-        console.log(key, value);
-        progReport.question = this.programQnList[index].program
-        progReport.answer = value
-        progReport.level = this.programQnList[index].programLevel
-        progReport.userId = this.SS_UserId
-        progReport.teamId = this.SS_TeamId
+    Swal.fire({
+      title: "Do you want to end the test?",
+      showDenyButton: false,
+      showCancelButton: true,
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.answerValue = this.programForm.value;
+        console.log(this.answerValue);
+    
+        let index = 0;
+        for (let key in this.answerValue) {
+          var progReport = { question: "", answer: "", level: "", userId: 0, teamId: 0 };
+          if (this.answerValue.hasOwnProperty(key)) {
+            const value = this.answerValue[key];
+    
+            console.log(key, value);
+            progReport.question = this.programQnList[index].program
+            progReport.answer = value
+            progReport.level = this.programQnList[index].programLevel
+            progReport.userId = this.SS_UserId
+            progReport.teamId = this.SS_TeamId
+          }
+          this.answerList.push(progReport)
+          index++;
+        }
+        console.log(this.answerList)
+        this.saveUserReport(value);
+    
+        sessionStorage.clear();
+      }else{
+        return;
       }
-      this.answerList.push(progReport)
-      index++;
-    }
-    console.log(this.answerList)
-    this.saveUserReport(value);
-
-    sessionStorage.clear();
+    });
+    
   }
   reportForm: report = new report();
   saveUserReport(value: boolean) {

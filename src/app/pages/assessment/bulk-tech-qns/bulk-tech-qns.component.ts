@@ -1,14 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { AlertifyService } from "src/app/shared-service/alertify.service";
 import Swal from "sweetalert2";
-import { generalQn } from "../add-gen-qn/gen-qn";
-import { GeneralService } from "../add-gen-qn/general.service";
-import { HomeService } from "../home/home.service";
 type AOA = any[][];
 import * as XLSX from "xlsx";
 import { message } from "src/app/common";
-import { TechService } from "../add-tech-qn/tech.service";
 import { Router } from "@angular/router";
+import { HomeService } from "../../home/home.service";
+import { TechService } from "../../add-tech-qn/tech.service";
+import { generalQn } from "../../add-gen-qn/gen-qn";
 @Component({
   selector: "app-bulk-tech-qns",
   templateUrl: "./bulk-tech-qns.component.html",

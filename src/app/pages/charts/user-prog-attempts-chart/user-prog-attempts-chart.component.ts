@@ -1,14 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexTitleSubtitle,
-  ApexStroke,
-  ApexGrid,
-} from "ng-apexcharts";
+import {ChartComponent} from "ng-apexcharts";
 import { message } from "src/app/common";
 import { AlertifyService } from "src/app/shared-service/alertify.service";
 import Swal from "sweetalert2";
@@ -25,11 +16,11 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: "app-user-attempts-chart",
-  templateUrl: "./user-attempts-chart.component.html",
-  styleUrls: ["./user-attempts-chart.component.css"],
+  selector: "app-user-prog-attempts-chart",
+  templateUrl: "./user-prog-attempts-chart.component.html",
+  styleUrls: ["./user-prog-attempts-chart.component.css"],
 })
-export class UserAttemptsChartComponent implements OnInit {
+export class UserProgAttemptsChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: any;
 
@@ -71,7 +62,7 @@ export class UserAttemptsChartComponent implements OnInit {
         curve: "straight",
       },
       title: {
-        text: " No. of users attended by recent dates - Level I",
+        text: " No. of users attended by recent dates - Level II ",
         align: "left",
       },
       grid: {
@@ -90,7 +81,7 @@ export class UserAttemptsChartComponent implements OnInit {
   count: any;
   ngOnInit() {
     this.alert.showLoading();
-    this.dashboardService.userAttemptsChart().subscribe(
+    this.dashboardService.userProgAttemptsChart().subscribe(
       (data) => {
         console.log(data);
         const { dates, count } = data;

@@ -43,6 +43,7 @@ import { UpdateProgQnComponent } from './pages/update-prog-qn/update-prog-qn.com
 import { ProgramreportComponent } from './pages/programreport/programreport.component';
 import { DatewiseremarkComponent } from './pages/datewiseremark/datewiseremark.component';
 import { ReviewprogramComponent } from './pages/reviewprogram/reviewprogram.component';
+import { UserProgAttemptsChartComponent } from './pages/charts/user-prog-attempts-chart/user-prog-attempts-chart.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { ReviewprogramComponent } from './pages/reviewprogram/reviewprogram.comp
     ProgramreportComponent,
     DatewiseremarkComponent,
     ReviewprogramComponent,
+    UserProgAttemptsChartComponent,
   ],
   imports: [
     
