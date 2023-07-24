@@ -27,6 +27,7 @@ import { ProgQnListComponent } from "./pages/prog-qn-list/prog-qn-list.component
 import { ProgramreportComponent } from "./pages/programreport/programreport.component";
 import { DatewiseremarkComponent } from "./pages/datewiseremark/datewiseremark.component";
 import { ReviewprogramComponent } from "./pages/reviewprogram/reviewprogram.component";
+import { BulkProgQnsComponent } from "./pages/bulk-prog-qns/bulk-prog-qns.component";
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "assessment", component: AssessmentComponent },
@@ -51,7 +52,7 @@ const routes: Routes = [
   { path: "admin-request", component: AdminRequestComponent },
   { path: "upload-gen-qns", component: MainComponent },
   { path: "upload-tech-qns", component: BulkTechQnsComponent },
-  // { path: "upload-prog-qns", component: BulkProgQnsComponent },
+  { path: "upload-prog-qns", component: BulkProgQnsComponent },
   { path: "promantus-projects", component: AllProLinksComponent },
   { path: "program", component: ProgramComponent },
   { path: "programreport", component: ProgramreportComponent },

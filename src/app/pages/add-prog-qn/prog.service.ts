@@ -68,7 +68,7 @@ export class ProgService {
     return this.httpClient.put(`${this.updateProgramQuestionUrl}`, progQn);
   }
 
-  saveBulkTechQuestions(progQn: ProgramQn[]): Observable<Object> {
+  saveBulkProgramQuestions(progQn: ProgramQn[]): Observable<Object> {
     return this.httpClient.post(`${this.saveBulkProgramQuestionsUrl}`, progQn);
   }
 

@@ -6,12 +6,19 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class FormatTimePipe implements PipeTransform {
   transform(value: number): string {
     //MM:SS format
-    const minutes: number = Math.floor(value / 60);
+    let minutes: number = Math.floor(value / 60);
+    console.log(minutes)
+    debugger
     return (
-      ("00" + minutes).slice(-2) +
+      minutes +
       ":" +
-      ("00" + Math.floor(value - minutes * 60)).slice(-2)
+      Math.floor(value - minutes * 60)
     );
+    // return (
+    //   ("00" + minutes).slice(-2) +
+    //   ":" +
+    //   ("00" + Math.floor(value - minutes * 60)).slice(-2)
+    // );
 
     // for HH:MM:SS
     //const hours: number = Math.floor(value / 3600);

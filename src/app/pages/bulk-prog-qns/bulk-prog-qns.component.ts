@@ -9,6 +9,7 @@ import * as XLSX from "xlsx";
 import { message } from "src/app/common";
 import { ProgService } from "../add-prog-qn/prog.service";
 import { Router } from "@angular/router";
+import { ProgramQn } from "../add-prog-qn/prog-qn";
 
 @Component({
   selector: 'app-bulk-prog-qns',
@@ -48,8 +49,8 @@ export class BulkProgQnsComponent implements OnInit {
     });
   }
 
-  resultList: generalQn[] = [];
-  genDto: generalQn = new generalQn();
+  resultList: ProgramQn[] = [];
+  progDto: ProgramQn = new ProgramQn();
   data: AOA = [];
   wopts: XLSX.WritingOptions = { bookType: "xlsx", type: "array" };
   fileName: string = "SheetJS.xlsx";
@@ -89,54 +90,54 @@ export class BulkProgQnsComponent implements OnInit {
 
   callingSaveBulkProgQnsService() {
     this.alert.showLoading();
-    // this.progService.saveBulkProgramQuestions(this.resultList).subscribe(
-    //   (data: any) => {
-    //     Swal.close();
-    //     console.log(data);
-    //     const { status, message, duplicateQns } = data;
-    //     if (status == 0) {
-    //       //After added
-    //       Swal.fire({
-    //         title: message,
-    //         showDenyButton: false,
-    //         showCancelButton: false,
-    //         allowOutsideClick: false,
-    //       }).then((result:any) => {
-    //         if (result.isConfirmed) {
-    //           this.clearInput();
-    //           this.router.navigateByUrl("/prog-qn-list");
-    //         }
-    //       });
-    //     } else if (status == 1) {
-    //       Swal.fire({
-    //         position: "center",
-    //         icon: "error",
-    //         text: message,
-    //         showConfirmButton: true,
-    //       });
-    //     } else if (status == 1 && duplicateQns == "duplicateQns" || duplicateQns != undefined) {
-    //       Swal.fire({
-    //         position: "center",
-    //         icon: "error",
-    //         title: message,
-    //         text: duplicateQns,
-    //         showConfirmButton: true,
-    //       });
-    //     }
-    //   },
-    //   (err:any) => {
-    //     console.log("Error :");
-    //     console.log(err);
-    //     Swal.fire({
-    //       position: "center",
-    //       icon: "error",
-    //       title: message.SOMETHING_WRONG,
-    //       text: err,
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //     });
-    //   }
-    // );
+    this.progService.saveBulkProgramQuestions(this.resultList).subscribe(
+      (data: any) => {
+        Swal.close();
+        console.log(data);
+        const { status, message, duplicateQns } = data;
+        if (status == 0) {
+          //After added
+          Swal.fire({
+            title: message,
+            showDenyButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false,
+          }).then((result:any) => {
+            if (result.isConfirmed) {
+              this.clearInput();
+              this.router.navigateByUrl("/prog-qn-list");
+            }
+          });
+        } else if (status == 1) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            text: message,
+            showConfirmButton: true,
+          });
+        } else if (status == 1 && duplicateQns == "duplicateQns" || duplicateQns != undefined) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: message,
+            text: duplicateQns,
+            showConfirmButton: true,
+          });
+        }
+      },
+      (err:any) => {
+        console.log("Error :");
+        console.log(err);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: message.SOMETHING_WRONG,
+          text: err,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    );
   }
 
   clearInput() {
@@ -197,15 +198,15 @@ export class BulkProgQnsComponent implements OnInit {
         }
 
         for (var i = 0; i < len; i++) {
-          this.genDto = new generalQn();
-          this.genDto.question = this.data[i][0];
-          this.genDto.option1 = this.data[i][1];
-          this.genDto.option2 = this.data[i][2];
-          this.genDto.option3 = this.data[i][3];
-          this.genDto.option4 = this.data[i][4];
-          this.genDto.answer = this.data[i][5];
-          this.genDto.teamId = this.teamId;
-          this.resultList.push(this.genDto);
+          this.progDto = new ProgramQn();
+          this.progDto.programLevel = this.data[i][0];
+          this.progDto.program = this.data[i][1];
+          // this.progDto.answer= this.data[i][2];
+          // this.progDto.option3 = this.data[i][3];
+          // this.progDto.option4 = this.data[i][4];
+          // this.progDto.answer = this.data[i][5];
+          this.progDto.teamId = this.teamId;
+          this.resultList.push(this.progDto);
         }
 
         // console.log(this.resultList);
@@ -213,12 +214,10 @@ export class BulkProgQnsComponent implements OnInit {
         this.resultList.map((res) => {
           console.log(res);
           if (
-            res.question === undefined ||
-            res.option1 === undefined ||
-            res.option2 === undefined ||
-            res.option3 === undefined ||
-            res.option4 === undefined ||
-            res.answer === undefined
+            res.program === undefined ||
+            res.programLevel === undefined ||
+            res.teamId === undefined 
+            // res.answer === undefined
           ) {
             Swal.fire({
               title: "Invalid Data found. Check your excel and re-upload",

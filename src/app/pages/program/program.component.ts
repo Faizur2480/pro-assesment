@@ -206,7 +206,7 @@ export class ProgramComponent implements OnInit {
 
     // const totQns = this.programQnList.length;
     console.log(this.programForm)
-    //Calculating time for questions
+  //   //Calculating time for questions
     var countOfA = 0, countOfB = 0, countOfI = 0
     var timeForA = 0, timeForB = 0, timeForI = 0
     for (var i = 0; i < this.programQnList.length; i++) {
@@ -232,6 +232,38 @@ export class ProgramComponent implements OnInit {
     // time starting here
     this.startTimer();
   }
+//   // Initializing variables
+// let countOfA = 0, countOfB = 0, countOfI = 0;
+// let timeForA = 0, timeForB = 0, timeForI = 0;
+
+// // Loop through the programQnList
+// for (let i = 0; i < this.programQnList.length; i++) {
+//   if (this.programQnList[i].programLevel === "B") {
+//     countOfB++;
+//   } else if (this.programQnList[i].programLevel === "I") {
+//     countOfI++;
+//   } else if (this.programQnList[i].programLevel === "A") {
+//     countOfA++;
+//   }
+// }
+
+// // Calculate time for each program level
+// if (countOfB !== 0) {
+//   timeForB = countOfB * 900;
+// }
+// if (countOfI !== 0) {
+//   timeForI = countOfI * 1800;
+// }
+// if (countOfA !== 0) {
+//   timeForA = countOfA * 2700;
+// }
+
+// // Calculate total time left
+// this.timeLeft = timeForA + timeForB + timeForI;
+
+// // Start the timer
+// this.startTimer();
+// }
   getprogramQns(teamId: string, userId: string) {
     this.progService.getProgramQns(teamId, userId).subscribe((data) => {
       console.log(data);
